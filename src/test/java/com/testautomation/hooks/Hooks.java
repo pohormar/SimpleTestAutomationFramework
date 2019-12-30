@@ -14,22 +14,24 @@ public class Hooks {
     private final static Logger logger = Logger.getLogger(Hooks.class);
     private DriverContext context;
 
+    static {
+        PropertyConfigurator.configure("log4j.properties");
+    }
+
     @Autowired
     Hooks(DriverContext context) {
         this.context = context;
     }
 
     @Before
-    public void initalizeScenario() {
-        PropertyConfigurator.configure("log4j.properties");
-        this.context.setDriver(DriverFactory.getWebDriver());
-
-        logger.info("test initialized");
+    public void initializeScenario() {
+        this.context.setDrivers(DriverFactory.getWebDriver());
+        logger.info("[Test initialized]");
     }
 
     @After
     public void after() {
-        logger.info("closing test");
+        logger.info("[Closing test]");
         context.getDriver().quit();
     }
 }

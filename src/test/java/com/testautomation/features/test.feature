@@ -1,6 +1,6 @@
-Feature: google
+Feature: wikipedia search feature
 
-  Scenario: google check
-    Given go to wikipedia
-    When click on source
-    Then source header is displayed
+  Scenario: search for existing term
+    Given user is on main wiki page
+    When user search for Selenium
+    Then result page is displayed

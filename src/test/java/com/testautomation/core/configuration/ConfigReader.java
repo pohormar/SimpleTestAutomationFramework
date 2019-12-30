@@ -7,26 +7,31 @@ import java.util.Properties;
 
 public class ConfigReader {
 
-    public static Properties readPropertiesFile(String fileName) throws IOException {
+    private static final String CONFIG_FILE = "env.properties";
+
+    public static Properties readPropertiesFile(String fileName) {
         FileInputStream fis = null;
-        Properties prop = null;
+        Properties properties = null;
 
         try {
             fis = new FileInputStream(fileName);
-            prop = new Properties();
-            prop.load(fis);
+            properties = new Properties();
+            properties.load(fis);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            fis.close();
         }
-        return prop;
+
+        return properties;
     }
 
-    public static String getProperty(String propertyName) throws IOException {
-        Properties prop = readPropertiesFile("env.properties");
-        return prop.getProperty(propertyName);
+    public static Properties readPropertiesFile() {
+        return readPropertiesFile(CONFIG_FILE);
+    }
+
+    public static String getProperty(String propertyName) {
+        Properties properties = readPropertiesFile(CONFIG_FILE);
+        return properties.getProperty(propertyName);
     }
 }

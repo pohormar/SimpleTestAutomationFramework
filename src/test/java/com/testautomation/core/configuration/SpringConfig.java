@@ -1,4 +1,5 @@
 package com.testautomation.core.configuration;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 

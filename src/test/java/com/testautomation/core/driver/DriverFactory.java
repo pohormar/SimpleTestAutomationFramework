@@ -8,22 +8,16 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
-
-    public final static Logger logger = Logger.getLogger(DriverFactory.class);
-    public static Properties configuration;
+    private final static Logger logger = Logger.getLogger(DriverFactory.class);
+    private final static Properties configuration;
 
     static {
-        try {
-            configuration = ConfigReader.readPropertiesFile("env.properties");
-            logger.info("[Chrome driver selected]");
-        } catch (IOException e) {
-            logger.error("Properties file not found! " + e.getStackTrace());
-        }
+        logger.info("[Reading configuration]");
+        configuration = ConfigReader.readPropertiesFile();
     }
 
     public static EventFiringWebDriver getWebDriver() {
@@ -56,6 +50,7 @@ public class DriverFactory {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Integer.parseInt(configuration.getProperty("implicitlyTimeout")), TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(configuration.getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
+        driver.get(configuration.getProperty("url"));
     }
 
     private static EventFiringWebDriver wrapIntoEventFiringWebdriver(WebDriver driver) {
