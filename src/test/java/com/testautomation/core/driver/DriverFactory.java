@@ -54,7 +54,7 @@ public class DriverFactory {
     }
 
     private static void configureWebDriver(WebDriver driver) {
-        int implicitWait = Integer.parseInt(configuration.getProperty("timeout.implicitlyTimeout"));
+        int implicitWait = Integer.parseInt(configuration.getProperty("timeout.implicitTimeout"));
         int pageLoadTimeout = Integer.parseInt(configuration.getProperty("timeout.pageLoadTimeout"));
         int scriptTimeout = Integer.parseInt(configuration.getProperty("timeout.scriptTimeout"))
             
