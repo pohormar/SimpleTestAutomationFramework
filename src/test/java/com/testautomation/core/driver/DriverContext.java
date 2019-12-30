@@ -21,7 +21,7 @@ public class DriverContext {
 
     public void setDrivers(EventFiringWebDriver driver) {
         this.driver = driver;
-        int timeout = Integer.parseInt(ConfigReader.getProperty("timeout.explicitWait"));
+        int timeout = Integer.parseInt(ConfigReader.getProperty("timeout.explicitTimeout"));
         this.wait = new WebDriverWait(driver, timeout);
     }
 
