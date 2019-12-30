@@ -1,4 +1,6 @@
 Feature: google
 
   Scenario: google check
-    Given go to google
+    Given go to wikipedia
+    When click on source
+    Then source header is displayed

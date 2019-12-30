@@ -75,12 +75,12 @@ public class EventHandler implements WebDriverEventListener {
 
     @Override
     public void beforeFindBy(By by, WebElement webElement, WebDriver webDriver) {
-        logger.info("Searching for element: " + webElement.toString());
+        logger.info("Searching for element: " + by.toString());
     }
 
     @Override
     public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
-        logger.info("Element found: " + webElement.toString());
+        logger.info("Element found: " + by.toString());
     }
 
     @Override
