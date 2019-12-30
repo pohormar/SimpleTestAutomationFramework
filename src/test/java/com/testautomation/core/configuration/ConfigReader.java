@@ -1,4 +1,4 @@
-package Core.Configuration;
+package com.testautomation.core.configuration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class ConfigReader {
 
-    private static Properties readPropertiesFile(String fileName) throws IOException {
+    public static Properties readPropertiesFile(String fileName) throws IOException {
         FileInputStream fis = null;
         Properties prop = null;
 
@@ -25,7 +25,7 @@ public class ConfigReader {
         return prop;
     }
 
-    public static String getProperty(String propertyName)  throws IOException {
+    public static String getProperty(String propertyName) throws IOException {
         Properties prop = readPropertiesFile("env.properties");
         return prop.getProperty(propertyName);
     }

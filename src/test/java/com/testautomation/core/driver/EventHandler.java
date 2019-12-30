@@ -1,10 +1,10 @@
-package Core.Driver;
+package com.testautomation.core.driver;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-public class EventHandler  implements WebDriverEventListener {
+public class EventHandler implements WebDriverEventListener {
 
     final static Logger logger = Logger.getLogger(EventHandler.class);
 
