@@ -56,10 +56,12 @@ public class DriverFactory {
     private static void configureWebDriver(WebDriver driver) {
         int implicitWait = Integer.parseInt(configuration.getProperty("timeout.implicitlyTimeout"));
         int pageLoadTimeout = Integer.parseInt(configuration.getProperty("timeout.pageLoadTimeout"));
-
+        int scriptTimeout = Integer.parseInt(configuration.getProperty("timeout.scriptTimeout"))
+            
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(scriptTimeout, TimeUnit.SECONDS);
         driver.get(configuration.getProperty("url"));
     }
 
