@@ -1,15 +1,19 @@
-package com.testautomation.core.driver;
+package com.testautomation.core.driver.eventhandlers;
 
+import com.testautomation.core.configuration.ConfigReader;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class EventHandler implements WebDriverEventListener {
+public class DefaultEventHandler implements WebDriverEventListener {
 
-    final static Logger logger = Logger.getLogger(EventHandler.class);
+    final static Logger logger = Logger.getLogger(DefaultEventHandler.class);
 
     public void addColor(WebDriver webDriver, WebElement webElement, String color) {
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].setAttribute('style', arguments[1]); ",
+        JavascriptExecutor js = ((JavascriptExecutor) webDriver);
+        js.executeScript("arguments[0].setAttribute('style', arguments[1]); ",
                 webElement, "color: " + color + "; border: 4px solid " + color + ";");
     }
 
@@ -76,11 +80,15 @@ public class EventHandler implements WebDriverEventListener {
     @Override
     public void beforeFindBy(By by, WebElement webElement, WebDriver webDriver) {
         logger.info("Searching for element: " + by.toString());
+        int timeout = Integer.parseInt(ConfigReader.getProperty("timeout.explicitWait"));
+        WebDriverWait wait = new WebDriverWait(webDriver, timeout);
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     @Override
     public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
         logger.info("Element found: " + by.toString());
+        addColor(webDriver, webElement, "orange");
     }
 
     @Override
@@ -92,7 +100,6 @@ public class EventHandler implements WebDriverEventListener {
     @Override
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
         logger.info("Clicked on element: " + webElement.toString());
-        addColor(webDriver, webElement, "orange");
     }
 
     @Override

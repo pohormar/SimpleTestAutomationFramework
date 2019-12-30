@@ -17,10 +17,10 @@ public class WikipediaResultPageSteps {
         this.resultPage = new WikipediaResultPage(context);
     }
 
-    @Then("result page is displayed")
-    public void sourceHeaderIsDisplayed() throws InterruptedException {
+    @Then("(.*) result page is displayed")
+    public void sourceHeaderIsDisplayed(String searchedText) {
         Assert.assertTrue(resultPage.articleHeader.isDisplayed());
-        Assert.assertTrue(resultPage.articleHeader.getText().contains("Selenium"));
+        Assert.assertTrue(resultPage.articleHeader.getText().contains(searchedText));
         Assert.assertTrue(resultPage.articleContentText.isDisplayed());
     }
 }

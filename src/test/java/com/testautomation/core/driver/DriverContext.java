@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class DriverContext {
 
     private EventFiringWebDriver driver;
-    private Wait wait;
+    private WebDriverWait wait;
 
     public EventFiringWebDriver getDriver() {
         return driver;
@@ -21,8 +21,8 @@ public class DriverContext {
 
     public void setDrivers(EventFiringWebDriver driver) {
         this.driver = driver;
-        int timeout = Integer.parseInt(ConfigReader.getProperty("webDriverWaitTimeout"));
-        this.wait = new Wait(driver, timeout);
+        int timeout = Integer.parseInt(ConfigReader.getProperty("timeout.explicitWait"));
+        this.wait = new WebDriverWait(driver, timeout);
     }
 
 }

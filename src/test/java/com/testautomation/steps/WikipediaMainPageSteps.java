@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 public class WikipediaMainPageSteps {
 
     private final static Logger logger = Logger.getLogger(WikipediaMainPageSteps.class);
@@ -27,7 +26,7 @@ public class WikipediaMainPageSteps {
 
     @When("user search for (.*)")
     public void clickOnSource(String searchText) throws InterruptedException {
-       wikiMainPage.searchTextBox.sendKeys("selenium");
+       wikiMainPage.searchTextBox.sendKeys(searchText);
        wikiMainPage.searchButton.click();
     }
 
