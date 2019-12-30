@@ -6,4 +6,4 @@ Example usage of:
 - eventHandler
 - coloring elements of page
 - waiters executed before finding element event
-- page object pattern and page factory pattern
+- page object and page factory design patterns
