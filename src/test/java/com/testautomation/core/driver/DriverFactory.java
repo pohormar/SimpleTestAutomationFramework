@@ -10,22 +10,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
-    private final static Logger logger = Logger.getLogger(DriverFactory.class);
-    private final static Properties configuration;
 
-    static {
-        logger.info("[Reading configuration]");
-        configuration = ConfigReader.readPropertiesFile();
-    }
+    private final static Logger logger = Logger.getLogger(DriverFactory.class);
 
     public static EventFiringWebDriver getWebDriver() {
         WebDriver webDriver;
 
-        switch (configuration.getProperty("driver.Type")) {
+        switch (ConfigReader.getPropertyAsString("driver.Type")) {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
                 webDriver = new ChromeDriver();
@@ -54,15 +48,15 @@ public class DriverFactory {
     }
 
     private static void configureWebDriver(WebDriver driver) {
-        int implicitTimeout = Integer.parseInt(configuration.getProperty("timeout.implicitTimeout"));
-        int pageLoadTimeout = Integer.parseInt(configuration.getProperty("timeout.pageLoadTimeout"));
-        int scriptTimeout = Integer.parseInt(configuration.getProperty("timeout.scriptTimeout"))
-            
+        int implicitTimeout = ConfigReader.getPropertyAsInt("timeout.implicitTimeout");
+        int pageLoadTimeout = ConfigReader.getPropertyAsInt("timeout.pageLoadTimeout");
+        int scriptTimeout = ConfigReader.getPropertyAsInt("timeout.scriptTimeout");
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(implicitTimeout, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(scriptTimeout, TimeUnit.SECONDS);
-        driver.get(configuration.getProperty("url"));
+        driver.get(ConfigReader.getPropertyAsString("url"));
     }
 
     private static EventFiringWebDriver wrapIntoEventFiringWebdriver(WebDriver driver) {

@@ -8,6 +8,11 @@ import java.util.Properties;
 public class ConfigReader {
 
     private static final String CONFIG_FILE = "env.properties";
+    private static Properties configuration;
+
+    static {
+        configuration = readPropertiesFile(CONFIG_FILE);
+    }
 
     public static Properties readPropertiesFile(String fileName) {
         FileInputStream fis = null;
@@ -26,12 +31,11 @@ public class ConfigReader {
         return properties;
     }
 
-    public static Properties readPropertiesFile() {
-        return readPropertiesFile(CONFIG_FILE);
+    public static String getPropertyAsString(String propertyName) {
+        return configuration.getProperty(propertyName);
     }
 
-    public static String getProperty(String propertyName) {
-        Properties properties = readPropertiesFile(CONFIG_FILE);
-        return properties.getProperty(propertyName);
+    public static int getPropertyAsInt(String propertyName) {
+        return Integer.parseInt(configuration.getProperty(propertyName));
     }
 }
