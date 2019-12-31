@@ -15,9 +15,8 @@ public class DefaultWait extends WebDriverWait {
     private int implicitTimeout;
 
     public DefaultWait(WebDriver driver) {
-        super(driver, ConfigReader.getPropertyAsInt("timeout.explicitWait"));
-
-        this.webDriver = webDriver;
+        super(driver, ConfigReader.getPropertyAsInt("timeout.explicitTimeout"));
+        this.webDriver = driver;
         this.implicitTimeout = ConfigReader.getPropertyAsInt("timeout.implicitTimeout");
     }
 
@@ -29,9 +28,9 @@ public class DefaultWait extends WebDriverWait {
 
     //todo: add lambda call instead of repeating code
     public WebElement waitForPresence(By by) {
-        webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        this.webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WebElement el = until(ExpectedConditions.presenceOfElementLocated(by));
-        webDriver.manage().timeouts().implicitlyWait(implicitTimeout, TimeUnit.SECONDS);
+        this.webDriver.manage().timeouts().implicitlyWait(implicitTimeout, TimeUnit.SECONDS);
         return el;
     }
 
