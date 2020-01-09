@@ -15,7 +15,7 @@ public class DriverContext {
         return driver;
     }
 
-    public WebDriverWait GetWebdriverWait() {
+    public WebDriverWait getWebdriverWait() {
         return wait;
     }
 
